@@ -9,6 +9,7 @@
 // -----------------------------
 // System headers
 // -----------------------------
+#include <stddef.h>
 #include "gnuplot.h"
 
 
@@ -19,6 +20,33 @@
 /* Constants */
 
 /* Types declarations */
+
+struct movie {
+    unsigned int id;
+    char *name;
+    double *affinity;
+    size_t totalAffinity;    // Total of elements for the affinity array
+};
+
+typedef struct movie Movie_t;
+
+struct user {
+    unsigned int id;
+    char *name;
+    double *affinity;
+    size_t totalAffinity;    // Total of elements for the affinity array
+};
+
+typedef struct user User_t;
+
+struct data {
+    Movie_t **movies;
+    User_t **users;
+    size_t totalMovies;
+    size_t totalUsers;
+};
+
+typedef struct data Data_t;
 
 /* Global variables */
 
