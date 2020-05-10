@@ -35,6 +35,8 @@ struct user {
     char *name;
     double *affinity;
     size_t totalAffinity;    // Total of elements for the affinity array
+    unsigned int *watchedMovies;
+    size_t watchTotal;       // Number of watched movies
 };
 
 typedef struct user User_t;
