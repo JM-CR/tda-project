@@ -1,7 +1,7 @@
 // See training.h for more info
 // Author: Josue Mosiah Contreras Rocha
 // File: training.c
-// Date: 17/02/20
+// Date: 11/05/20
 
 // ------------------------------------------
 // System and aplication specific headers
@@ -84,7 +84,16 @@ static User_t *newUser( char *name ) {
  * @return Movie object.
  */
 static Movie_t *newMovie( char *name ) {
-    return NULL;
+    // Status variables
+    static int lastID = 1;
+
+    // Set values
+    Movie_t *movie = malloc(sizeof(Movie_t));
+    movie->id = lastID++;
+    movie->name = name;
+    movie->affinity = calloc(TOTAL_FEATURES, sizeof(double));
+    movie->totalAffinity = TOTAL_FEATURES;
+    return movie;
 }
 
 /**
@@ -135,10 +144,73 @@ static User_t *findUser( char *username, Data_t *data ) {
 }
 
 /**
- * Loads a CSV file to use as initial values for the app.
+ * Seeks a movie in the data struct. If it doesn't exist a new one is created.
  *
- * @return A data object with every value initialized.
+ * @param name Name of the movie.
+ * @return Found movie; NULL if no more movies can be created.
  */
+static Movie_t *findMovie( char *name, Data_t *data ) {
+    // Guards
+    if ( data->totalMovies == 0 ) {
+        data->movies[0] = newMovie(name);
+        data->totalMovies++;
+        return data->movies[0];
+    } else if ( data->totalMovies == MAX_MOVIES ) {
+        return NULL;
+    }
+
+    // Seek
+    Movie_t *match = NULL;
+    for ( int i = 0; i < data->totalMovies; ++i ) {
+        if ( strcmp(data->movies[i]->name, name) == 0 ) {
+            match = data->movies[i];
+            break;
+        }
+    }
+
+    // Create if not exists
+    if ( match == NULL ) {
+        size_t index = data->totalMovies++;
+        match = data->movies[index] = newMovie(name);
+    }
+    return match;
+}
+
+/**
+ * Appends a movie to a user if it hasn't been loaded before.
+ *
+ * @param user User where the movie will be appended.
+ * @param movie Movie to append.
+ */
+static void appendMovie( User_t *user, Movie_t *movie ) {
+    // Guards
+    if ( user == NULL || movie == NULL ) {
+        return;
+    }
+
+    // Seek
+    bool found = false;
+    for ( int i = 0; i < user->watchTotal; ++i ) {
+        if ( user->watchedMovies[i] == movie->id ) {
+            found = true;
+            break;
+        }
+    }
+
+    // Add if not exists
+    if ( !found && user->watchTotal < MAX_WATCHED ) {
+        size_t index = user->watchTotal++;
+        user->watchedMovies[index] = movie->id;
+    }
+}
+
+
+// -----------------------------
+// Public elements
+// -----------------------------
+
+/* Implementation of the public functions */
+
 Data_t *loadCSVFile( void ) {
     // Open file
     FILE *fp = fopen(TRAINING_FILE, "r");
@@ -147,10 +219,8 @@ Data_t *loadCSVFile( void ) {
         exit(EXIT_FAILURE);
     }
 
-    // Initial setup
-    Data_t *data = newData();
-
     // Read file
+    Data_t *data = newData();
     char line[100], *token;
     while ( fgets(line, sizeof line, fp) != NULL ) {
         // Process user
@@ -159,6 +229,8 @@ Data_t *loadCSVFile( void ) {
 
         // Process movie name
         token = strtok(NULL, ",");
+        Movie_t *movie = findMovie(token, data);
+        appendMovie(user, movie);
 
         // Process ranking
         token = strtok(NULL, ",");
@@ -172,9 +244,3 @@ Data_t *loadCSVFile( void ) {
 
     return data;
 }
-
-// -----------------------------
-// Public elements
-// -----------------------------
-
-/* Implementation of the public functions */

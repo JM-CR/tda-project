@@ -1,7 +1,7 @@
-// Template to create C libraries.
+// Functions to load data and train the recommendations app.
 // Author: Josue Mosiah Contreras Rocha
 // File: training.h
-// Date: 17/02/20
+// Date: 11/05/20
 
 #ifndef TRAINING_H
 #define TRAINING_H
@@ -62,7 +62,9 @@ typedef struct data Data_t;
 /* Function prototypes */
 
 /**
- * Function's documentation.
+ * Loads the "TRAINING_FILE" to initialize objects for the app.
+ *
+ * @return A data object with every value initialized.
  */
 Data_t *loadCSVFile( void );
 
