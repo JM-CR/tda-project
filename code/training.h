@@ -19,6 +19,13 @@
 
 /* Constants */
 
+#define MAX_USERS 30       // Maximum number of users
+#define MAX_MOVIES 100     // Maximum number of movies
+#define MAX_WATCHED 20     // Maximum number of watched movies
+#define TOTAL_FEATURES 9   // Size of the affinity vector
+
+#define TRAINING_FILE "training_files/data.csv"
+
 /* Types declarations */
 
 struct movie {

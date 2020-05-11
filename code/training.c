@@ -6,9 +6,11 @@
 // ------------------------------------------
 // System and aplication specific headers
 // ------------------------------------------
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "training.h"
 
 
@@ -25,43 +27,98 @@
 /* Private functions */
 
 /**
+ * Generates a random number.
+ *
+ * @return The number.
+ */
+static double randomNumber( void ) {
+    // Initial set up
+	static bool firstRun = true;
+	if ( firstRun ) {
+		firstRun = false;
+		srand(time(0));
+	}
+
+    // Get random
+    return (double)rand() / (double)RAND_MAX;
+}
+
+/**
+ * Creates random vector for the user's affinities.
+ *
+ * @return Array of affinities.
+ */
+static double *randomAffinities( void ) {
+    double *vector = calloc(TOTAL_FEATURES, sizeof(double));
+    for ( int i = 0; i < TOTAL_FEATURES; ++i ) {
+        vector[i] = randomNumber();
+    }
+    return vector;
+}
+
+/**
  * Creates a new user object.
  *
- * @param id Unique id.
  * @param name Name of the user.
- * @param sizeAffinity Size of the features' vector.
  * @return User object.
  */
-static User_t *newUser( unsigned int id, char *name, size_t totalAffinity ) {
-    return NULL;
+static User_t *newUser( char *name ) {
+    // Status variables
+    static int lastID = 1;
+
+    // Set values
+    User_t *user = malloc(sizeof(User_t));
+    user->id = lastID++;
+    user->name = name;
+    user->affinity = randomAffinities();
+    user->totalAffinity = TOTAL_FEATURES;
+    user->watchedMovies = calloc(MAX_WATCHED, sizeof(int));
+    user->watchTotal = 0;
+    return user;
 }
 
 /**
  * Creates a new movie object.
  *
- * @param id Unique id.
  * @param name Name of the movie.
- * @param sizeAffinity Size of the features' vector.
  * @return Movie object.
  */
-static Movie_t *newMovie( unsigned int id, char *name, size_t totalAffinity ) {
+static Movie_t *newMovie( char *name ) {
     return NULL;
 }
 
 /**
- * Creates a new data object.
+ * Creates a new data object with an empty set of users and movies.
  *
- * @param totalMovies Total of movies.
- * @param totalUsers Total of users.
  * @return Data object.
  */
-static Data_t *newData( size_t totalMovies, size_t totalUsers ) {
+static Data_t *newData( void ) {
     Data_t *data = malloc(sizeof(Data_t));
-    data->movies = calloc(totalMovies, sizeof(Movie_t));
-    data->users = calloc(totalUsers, sizeof(User_t));
-    data->totalMovies = totalMovies;
-    data->totalUsers = totalUsers;
+    data->users = calloc(MAX_USERS, sizeof(User_t));
+    data->movies = calloc(MAX_MOVIES, sizeof(Movie_t));
+    data->totalMovies = 0;
+    data->totalUsers = 0;
     return data;
+}
+
+/**
+ * Seeks a user in the data struct. If it doesn't exist a new one is created.
+ *
+ * @param username Name of the user.
+ * @return Found user; NULL if no more users can be created.
+ */
+static User_t *findUser( char *username, Data_t *data ) {
+    // Guards
+    if ( data->totalUsers == 0 ) {
+        data->users[0] = newUser(username);
+        data->totalUsers++;
+        return data->users[0];
+    } else if ( data->totalUsers == MAX_USERS ) {
+        return NULL;
+    }
+
+    // Seek or create
+
 }
 
 /**
@@ -71,36 +128,35 @@ static Data_t *newData( size_t totalMovies, size_t totalUsers ) {
  */
 Data_t *loadCSVFile( void ) {
     // Open file
-    FILE *fp = fopen("training_files/data.csv", "r");
+    FILE *fp = fopen(TRAINING_FILE, "r");
     if ( fp == NULL ) {
         fprintf(stderr, "\nError leyendo archivo de entrenamiento.\n");
         exit(EXIT_FAILURE);
     }
 
+    // Initial setup
+    Data_t *data = newData();
+
     // Read file
-    int userID = 1, movieID = 1;
     char line[100], *token;
     while ( fgets(line, sizeof line, fp) != NULL ) {
-        // Process user name
+        // Process user
         token = strtok(line, ",");
+        User_t *user = findUser(token, data);
 
         // Process movie name
-        puts(token);
         token = strtok(NULL, ",");
 
         // Process ranking
-        puts(token);
         token = strtok(NULL, ",");
 
         // Process features
         while ( token ) {
-            puts(token);
             token = strtok(NULL, ",");
         }
     }
-
     fclose(fp);
-    Data_t *data = newData(10, 10);
+
     return data;
 }
 
