@@ -117,8 +117,21 @@ static User_t *findUser( char *username, Data_t *data ) {
         return NULL;
     }
 
-    // Seek or create
+    // Seek
+    User_t *match = NULL;
+    for ( int i = 0; i < data->totalUsers; ++i ) {
+        if ( strcmp(data->users[i]->name, username) == 0 ) {
+            match = data->users[i];
+            break;
+        }
+    }
 
+    // Create if not exists
+    if ( match == NULL ) {
+        size_t index = data->totalUsers++;
+        match = data->users[index] = newUser(username);
+    }
+    return match;
 }
 
 /**
