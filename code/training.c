@@ -62,7 +62,7 @@ static double *randomAffinities( void ) {
  * @param name Name of the user.
  * @return User object.
  */
-static User_t *newUser( char *name ) {
+static User_t *createUser( char *name ) {
     // Status variables
     static int lastID = 1;
     char *copy = calloc(strlen(name) + 1, sizeof(char));
@@ -86,7 +86,7 @@ static User_t *newUser( char *name ) {
  * @param name Name of the movie.
  * @return Movie object.
  */
-static Movie_t *newMovie( char *name ) {
+static Movie_t *createMovie( char *name ) {
     // Status variables
     static int lastID = 1;
     char *copy = calloc(strlen(name) + 1, sizeof(char));
@@ -124,7 +124,7 @@ static Data_t *newData( void ) {
 static User_t *findUser( char *username, Data_t *data ) {
     // Guards
     if ( data->totalUsers == 0 ) {
-        data->users[0] = newUser(username);
+        data->users[0] = createUser(username);
         data->totalUsers++;
         return data->users[0];
     } else if ( data->totalUsers == MAX_USERS ) {
@@ -143,7 +143,7 @@ static User_t *findUser( char *username, Data_t *data ) {
     // Create if not exists
     if ( match == NULL ) {
         size_t index = data->totalUsers++;
-        match = data->users[index] = newUser(username);
+        match = data->users[index] = createUser(username);
     }
     return match;
 }
@@ -157,7 +157,7 @@ static User_t *findUser( char *username, Data_t *data ) {
 static Movie_t *findMovie( char *name, Data_t *data ) {
     // Guards
     if ( data->totalMovies == 0 ) {
-        data->movies[0] = newMovie(name);
+        data->movies[0] = createMovie(name);
         data->totalMovies++;
         return data->movies[0];
     } else if ( data->totalMovies == MAX_MOVIES ) {
@@ -176,7 +176,7 @@ static Movie_t *findMovie( char *name, Data_t *data ) {
     // Create if not exists
     if ( match == NULL ) {
         size_t index = data->totalMovies++;
-        match = data->movies[index] = newMovie(name);
+        match = data->movies[index] = createMovie(name);
     }
     return match;
 }
