@@ -65,11 +65,13 @@ static double *randomAffinities( void ) {
 static User_t *newUser( char *name ) {
     // Status variables
     static int lastID = 1;
+    char *copy = calloc(strlen(name) + 1, sizeof(char));
+    strcpy(copy, name);
 
     // Set values
     User_t *user = malloc(sizeof(User_t));
     user->id = lastID++;
-    user->name = name;
+    user->name = copy;
     user->affinity = randomAffinities();
     user->watchedMovies = calloc(MAX_WATCHED, sizeof(int));
     user->ratings = calloc(MAX_WATCHED, sizeof(int));
@@ -87,11 +89,13 @@ static User_t *newUser( char *name ) {
 static Movie_t *newMovie( char *name ) {
     // Status variables
     static int lastID = 1;
+    char *copy = calloc(strlen(name) + 1, sizeof(char));
+    strcpy(copy, name);
 
     // Set values
     Movie_t *movie = malloc(sizeof(Movie_t));
     movie->id = lastID++;
-    movie->name = name;
+    movie->name = copy;
     movie->affinity = NULL;
     movie->totalAffinity = TOTAL_FEATURES;
     return movie;

@@ -8,7 +8,6 @@
 #include "model.h"
 
 int main( void ) {
-	(void) loadCSVFile();
 
 	return 0;
 }
