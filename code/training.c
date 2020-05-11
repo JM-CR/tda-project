@@ -91,7 +91,7 @@ static Movie_t *newMovie( char *name ) {
     Movie_t *movie = malloc(sizeof(Movie_t));
     movie->id = lastID++;
     movie->name = name;
-    movie->affinity = calloc(TOTAL_FEATURES, sizeof(double));
+    movie->affinity = NULL;
     movie->totalAffinity = TOTAL_FEATURES;
     return movie;
 }
@@ -204,6 +204,25 @@ static void appendMovie( User_t *user, Movie_t *movie ) {
     }
 }
 
+/**
+ * Sets the affinities for a movie.
+ *
+ * @param features Affinities to set.
+ * @param movie Movie where the affinities will be set.
+ */
+static void setFeatures( char *features[], Movie_t *movie ) {
+    // Guard
+    if ( movie->affinity != NULL || movie == NULL ) {
+        return;
+    }
+
+    // Set
+    movie->affinity = calloc(TOTAL_FEATURES, sizeof(double));
+    for ( int i = 0; i < TOTAL_FEATURES; ++i ) {
+        movie->affinity[i] = strtod(features[i], NULL);
+    }
+}
+
 
 // -----------------------------
 // Public elements
@@ -227,7 +246,7 @@ Data_t *loadCSVFile( void ) {
         token = strtok(line, ",");
         User_t *user = findUser(token, data);
 
-        // Process movie name
+        // Process movie
         token = strtok(NULL, ",");
         Movie_t *movie = findMovie(token, data);
         appendMovie(user, movie);
@@ -236,11 +255,15 @@ Data_t *loadCSVFile( void ) {
         token = strtok(NULL, ",");
 
         // Process features
+        int index = 0;
+        char *features[TOTAL_FEATURES];
         while ( token ) {
-            token = strtok(NULL, ",");
+            features[index++] = token = strtok(NULL, ",");
         }
+        setFeatures(features, movie);
     }
-    fclose(fp);
 
+    // Clean up
+    fclose(fp);
     return data;
 }

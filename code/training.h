@@ -22,7 +22,7 @@
 #define MAX_USERS 30       // Maximum number of users
 #define MAX_MOVIES 100     // Maximum number of movies
 #define MAX_WATCHED 20     // Maximum number of watched movies
-#define TOTAL_FEATURES 9   // Size of the affinity vector
+#define TOTAL_FEATURES 9   // Size for the affinity vector
 
 #define TRAINING_FILE "training_files/data.csv"
 
@@ -57,12 +57,10 @@ struct data {
 
 typedef struct data Data_t;
 
-/* Global variables */
-
 /* Function prototypes */
 
 /**
- * Loads the "TRAINING_FILE" to initialize objects for the app.
+ * Loads the "TRAINING_FILE" and initializes objects for the app.
  *
  * @return A data object with every value initialized.
  */
