@@ -41,8 +41,9 @@ struct user {
     unsigned int id;
     char *name;
     double *affinity;
-    size_t totalAffinity;    // Total of elements for the affinity array
     unsigned int *watchedMovies;
+    unsigned int *ratings;
+    size_t totalAffinity;    // Total of elements in the affinity array
     size_t watchTotal;       // Number of watched movies
 };
 

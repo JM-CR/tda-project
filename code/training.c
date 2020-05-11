@@ -71,8 +71,9 @@ static User_t *newUser( char *name ) {
     user->id = lastID++;
     user->name = name;
     user->affinity = randomAffinities();
-    user->totalAffinity = TOTAL_FEATURES;
     user->watchedMovies = calloc(MAX_WATCHED, sizeof(int));
+    user->ratings = calloc(MAX_WATCHED, sizeof(int));
+    user->totalAffinity = TOTAL_FEATURES;
     user->watchTotal = 0;
     return user;
 }
@@ -181,8 +182,9 @@ static Movie_t *findMovie( char *name, Data_t *data ) {
  *
  * @param user User where the movie will be appended.
  * @param movie Movie to append.
+ * @param rating User's rating for the movie.
  */
-static void appendMovie( User_t *user, Movie_t *movie ) {
+static void appendMovie( User_t *user, Movie_t *movie, char *rating ) {
     // Guards
     if ( user == NULL || movie == NULL ) {
         return;
@@ -201,6 +203,7 @@ static void appendMovie( User_t *user, Movie_t *movie ) {
     if ( !found && user->watchTotal < MAX_WATCHED ) {
         size_t index = user->watchTotal++;
         user->watchedMovies[index] = movie->id;
+        user->ratings[index] = strtod(rating, NULL);
     }
 }
 
@@ -243,22 +246,20 @@ Data_t *loadCSVFile( void ) {
     char line[100], *token;
     while ( fgets(line, sizeof line, fp) != NULL ) {
         // Process user
-        token = strtok(line, ",");
+        token = strtok(line, ",");  /* Username */
         User_t *user = findUser(token, data);
 
         // Process movie
-        token = strtok(NULL, ",");
+        token = strtok(NULL, ",");  /* Movie name */
         Movie_t *movie = findMovie(token, data);
-        appendMovie(user, movie);
-
-        // Process ranking
-        token = strtok(NULL, ",");
+        token = strtok(NULL, ",");  /* Rating */
+        appendMovie(user, movie, token);
 
         // Process features
         int index = 0;
         char *features[TOTAL_FEATURES];
         while ( token ) {
-            features[index++] = token = strtok(NULL, ",");
+            features[index++] = token = strtok(NULL, ",");  /* Features */
         }
         setFeatures(features, movie);
     }
