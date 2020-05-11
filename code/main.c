@@ -7,7 +7,8 @@
 #include "view.h"
 #include "model.h"
 
-int main(void) {
+int main( void ) {
+	(void) loadCSVFile();
 
 	return 0;
 }

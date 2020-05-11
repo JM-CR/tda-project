@@ -57,5 +57,6 @@ typedef struct data Data_t;
 /**
  * Function's documentation.
  */
+Data_t *loadCSVFile( void );
 
 #endif
