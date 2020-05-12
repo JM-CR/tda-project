@@ -67,4 +67,7 @@ typedef struct data Data_t;
  */
 Data_t *loadCSVFile( void );
 
+Data_t *start_training(void);
+
+
 #endif

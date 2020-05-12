@@ -43,11 +43,12 @@ static double randomNumber( void ) {
     return (double)rand() / (double)RAND_MAX;
 }
 
-/**
+/** 
  * Creates random vector for the user's affinities.
  *
  * @return Array of affinities.
  */
+
 static double *randomAffinities( void ) {
     double *vector = calloc(TOTAL_FEATURES, sizeof(double));
     for ( int i = 0; i < TOTAL_FEATURES; ++i ) {
@@ -230,6 +231,20 @@ static void setFeatures( char *features[], Movie_t *movie ) {
     }
 }
 
+/**
+ * Sets the affinities for a movie.
+ *
+ * @param size_vector
+ * @param aff_usr
+ * @param aff_movie
+ */
+static double dot_product(int size_vector, double *aff_usr, double *aff_movie){
+    double res=0;
+    for (int i = 0; i < size_vector; i++)    {
+       res += aff_usr[i] * aff_movie[i];
+    }
+    return res;
+}
 
 // -----------------------------
 // Public elements
@@ -267,8 +282,49 @@ Data_t *loadCSVFile( void ) {
         }
         setFeatures(features, movie);
     }
-
     // Clean up
     fclose(fp);
+    return data;
+}
+
+Data_t *start_training(void){
+    Data_t *data = loadCSVFile();
+    User_t *data_usr;
+    Movie_t *data_movie;
+    double res_dot_product=0, error=0, n=0.01;
+    int flag=0,count_flag=0;
+     while (flag != 1){
+        for (int i = 0; i < data->totalUsers; i++){
+            data_usr = data->users[i];
+            for (int j = 0; j < data->totalMovies; j++){
+                data_movie = data->movies[j];
+                //User dot priduct with Movie
+                if (data_usr->totalAffinity == data_movie->totalAffinity) {
+                    res_dot_product = dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity);
+                    //calculate error in training algorithm
+                    error = (double)data_usr->ratings[j] - res_dot_product;
+                    //calculate new values in affinity.
+                    for (int count=0; count < data_usr->totalAffinity; count++) {
+                        data_usr->affinity[count] = data_usr->affinity[count] + (n * error * data_movie->affinity[count]);
+                        data_movie->affinity[count] = data_movie->affinity[count] + (n * error * data_usr->affinity[count]);
+                    }
+                    data->users[i] = data_usr;
+                    data->movies[j] = data_movie;
+                    //GNU Plot
+                    if(error<0.1 && error>-0.1){
+                        count_flag++;
+                    }
+                } else {
+                    exit(EXIT_FAILURE);
+                }
+            }
+        }
+
+        if (count_flag == (data->totalMovies * data->totalUsers)){
+            flag = 1;
+        }else{
+            count_flag=0;
+        }
+    }
     return data;
 }
