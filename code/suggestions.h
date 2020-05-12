@@ -23,6 +23,12 @@
 /* Global variables */
 
 /* Function prototypes */
+void movieSuggestionUser(Data_t *data );
+
+void friendsSuggestions(Data_t *data);
+
+void movieSuggestionMovie(Data_t *data);
+
 
 /**
  * Function's documentation.
