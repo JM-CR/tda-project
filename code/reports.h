@@ -17,12 +17,15 @@
 // -----------------------------
 
 /* Constants */
+#define REPORTS_FILE "training_files/report.txt"
 
 /* Types declarations */
 
 /* Global variables */
+void print_in_file(char filename[50], Data_t *data);
 
 /* Function prototypes */
+
 
 /**
  * Function's documentation.

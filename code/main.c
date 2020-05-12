@@ -8,4 +8,7 @@
 #include "model.h"
 
 int main( void ) {
+	//Print report
+	print_in_file(REPORTS_FILE, loadCSVFile());
+	return 0;
 }
