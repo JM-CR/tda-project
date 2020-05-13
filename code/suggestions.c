@@ -1,7 +1,7 @@
-// See model.h for more info
-// Author: Josue Mosiah Contreras Rocha
+// See suggestions.h for more info
+// Author: Ivan Josue Guzman Felix
 // File: suggestions.c
-// Date: 17/02/20
+// Date: 10/05/20
 
 // ------------------------------------------
 // System and aplication specific headers

@@ -1,10 +1,11 @@
 // See training.h for more info
 // Author: Josue Mosiah Contreras Rocha
+// Author: Mariana Abigail Carmona Guzman
 // File: training.c
 // Date: 11/05/20
 
 // ------------------------------------------
-// System and aplication specific headers
+// System and application specific headers
 // ------------------------------------------
 #include <time.h>
 #include <stdio.h>
@@ -17,12 +18,6 @@
 // -----------------------------
 // Private elements
 // -----------------------------
-
-/* Private macros and constants */
-
-/* Private types */
-
-/* Private global variables */
 
 /* Private functions */
 
@@ -232,15 +227,16 @@ static void setFeatures( char *features[], Movie_t *movie ) {
 }
 
 /**
- * Sets the affinities for a movie.
+ * Calculates the dot product between to vectors.
  *
- * @param size_vector
- * @param aff_usr
- * @param aff_movie
+ * @param size_vector Number of elements.
+ * @param aff_usr Vector from the user.
+ * @param aff_movie Vector from the movies.
+ * @return Result.
  */
-static double dot_product(int size_vector, double *aff_usr, double *aff_movie){
+static double dot_product(int size_vector, double *aff_usr, double *aff_movie) {
     double res=0;
-    for (int i = 0; i < size_vector; i++)    {
+    for (int i = 0; i < size_vector; i++) {
        res += aff_usr[i] * aff_movie[i];
     }
     return res;
@@ -282,6 +278,7 @@ Data_t *loadCSVFile( void ) {
         }
         setFeatures(features, movie);
     }
+    
     // Clean up
     fclose(fp);
     return data;

@@ -1,7 +1,7 @@
-// Template to create C libraries.
-// Author: Josue Mosiah Contreras Rocha
+// Library to do reports at the end of the execution.
+// Author: Elena Ginebra Zarandona
 // File: reports.h
-// Date: 17/02/20
+// Date: 11/05/20
 
 #ifndef REPORTS_H
 #define REPORTS_H
@@ -22,13 +22,12 @@
 /* Types declarations */
 
 /* Global variables */
-void print_in_file(char filename[50], Data_t *data);
 
 /* Function prototypes */
-
 
 /**
  * Function's documentation.
  */
+void print_in_file(char filename[50], Data_t *data);
 
 #endif

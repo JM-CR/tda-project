@@ -67,7 +67,11 @@ typedef struct data Data_t;
  */
 Data_t *loadCSVFile( void );
 
+/**
+ * Trains the data object to use in the recommendations system.
+ *
+ * @return Trained object.
+ */
 Data_t *start_training(void);
-
 
 #endif

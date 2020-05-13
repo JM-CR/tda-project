@@ -1,14 +1,19 @@
 // File: main.c
-// Date: 11/04/20
+// Date: 10/05/20
 
 // ------------------------------------------
-// System and aplication specific headers
+// System and application specific headers
 // ------------------------------------------
 #include "view.h"
-#include "model.h"
+#include "suggestions.h"
+#include "reports.h"
 
 int main( void ) {
-	//Print report
-	print_in_file(REPORTS_FILE, loadCSVFile());
+	// Load data
+	initialGuide();
+	Data_t *data = start_training();
+
+	// Print report
+	print_in_file(REPORTS_FILE, data);
 	return 0;
 }

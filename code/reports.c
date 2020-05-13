@@ -1,7 +1,7 @@
 // See reports.h for more info
-// Author: Josue Mosiah Contreras Rocha
-// File: reports.c
-// Date: 17/02/20
+// Author: Elena Ginebra Zarandona
+// File: reports.h
+// Date: 11/05/20
 
 // ------------------------------------------
 // System and aplication specific headers
