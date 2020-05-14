@@ -50,10 +50,11 @@ void clearScreen( void ) {
 void initialGuide( void ) {
     printf(
         "\nSistema de recomendaciones.\n"
-        "\nCorrecto uso del programa:\n"
-        "\t1. \n"
-        "\t2. \n"
-        "\t3. \n\n"
+        "\nEquipo:\n"
+        "\t- Josue Mosiah Contreras Rocha\n"
+        "\t- Elena Ginebra Zarandona\n"
+        "\t- Mariana Abigail Carmona Guzman\n"
+        "\t- Ivan Josue Guzman Felix\n\n"
     );
 }
 

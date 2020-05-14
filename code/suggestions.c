@@ -7,8 +7,8 @@
 // System and aplication specific headers
 // ------------------------------------------
 #include <stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include <stdlib.h>
+#include <time.h>
 #include "suggestions.h"
 #include "view.h"
 

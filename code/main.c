@@ -10,17 +10,17 @@
 
 int main( void ) {
 	// Load data
-	int op, id;
 	initialGuide();
 	Data_t *initialData = loadCSVFile();
 	Data_t *trainedData = start_training(initialData);
-	// createGraph();
+	createGraph();
 
 	// Display data
 	displayUsers(trainedData);
 	displayMovies(initialData);
 
 	// Display menu
+	int op, id;
 	do {
 		op = SuggestionsOptions();
 		switch ( op ) {
