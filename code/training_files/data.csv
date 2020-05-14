@@ -1,33 +1,37 @@
-fatimagin,Joker,2,0.4,0.5,0,0,0,0,0,0,0.1,
-fatimagin,Brooklyn,5,0,0,0,0,0,0,0,0.5,0.5,
-fatimagin,Roma,3,0,0,0,0,0,0,0,0,1,
-fatimagin,Avengers,4,0.4,0,0,0.3,0.3,0,0,0,0,
-fatimagin,Star wars,4,0.4,0,0,0,0.3,0,0,0,0.3,
-fatimagin,Outlander,5,0.5,0,0,0,0.3,0,0,0.2,0,
-lennygin,Silver Linings Playbook,5,0,0,0,0.2,0,0,0,0.5,0.3,
-lennygin,Pride and Prejudice,5,0,0,0,0,0,0,0,1,0,
-lennygin,Tangled,5,0,0,0,0.1,0,0,0.6,0.2,0.1,
-lennygin,Hachi,3,0,0,0,0,0,0,0,0,1,
-lennygin,Frozen,3,0,0,0,0,0,0,0.8,0,0.2,
-lennygin,Mision Impossible,4,1,0,0,0,0,0,0,0,0,
-lennygin,Harry potter,5,0.1,0,0,0,0.7,0,0.1,0,0.1,
-lennygin,Lord of the Rings,5,0.3,0,0,0,0.7,0,0,0,0,
-lennygin,Brooklyn,5,0,0,0,0,0,0,0,0.5,0.5,
-lennygin,Star wars,5,0.4,0,0,0,0.3,0,0,0,0.3,
-Cesarin Angelidis,The Lord of The Rings,5,0.6,0,0,0,0.3,0,0,0.1,0,
-Cesarin Angelidis,Wonder,5,0,0,0,0.5,0,0.2,0.1,0,0.2,
-Cesarin Angelidis,Bourne Supremacy,2,0.7,0,0,0,0.3,0,0,0,0,
-Cesarin Angelidis,Moulin Rouge!,4,0,0,0,0.3,0.2,0,0,0.3,0.2,
-Cesarin Angelidis,Frozen,5,0.2,0,0,0.4,0.2,0,0.2,0,0,
-Aby,Lord of the Rings,5,0.5,0,0,0,0.5,0,0,0,0,
-Aby,La propuesta,5,0,0,0,0.3,0,0,0,0.7,0,
-Aby,Rango,1,0,0,0,0,0,0,1,0,0,
-Aby,Guerra de pap·s,3,0,0,0,1,0,0,0,0,0,
-Aby,La momia,4,0.6,0,0,0,0.1,0,0,0.3,0,
-Primi,Por mis pistolas,5,0,0,0,1,0,0,0,0,0,
-Primi,Santo en el hotel e la muerte,4,0.8,0,0,0,0.2,0,0,0,0,
-Primi,Dracula,1,0,0.3,0,0,0.7,0,0,0,0,
-Primi,John Week,5,1,0,0,0,0,0,0,0,0,
-Mony,El dÌa despuÈs de maÒana,5,0,0,0.7,0,0.3,0,0,0,0,
-Mony,DespuÈs de la tierra,3,0.5,0,0,0,0.5,0,0,0,0,
-Mony,Star wars,2,0.4,0,0,0,0.5,0,0.1,0,0,
+lennygin,Silver Linings Playbook,5,0.00,0.00,0.00,0.20,0.00,0.00,0.00,0.50,0.30
+lennygin,Pride and Prejudice,5,0.00,0.00,0.00,0.00,0.00,0.00,0.00,1,00,0.00
+lennygin,Tangled,5,0.00,0.00,0.00,0.10,0.00,0.00,0.60,0.20,0.10
+lennygin,Hachi,3,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,1,00
+lennygin,Frozen,3,0.00,0.00,0.00,0.00,0.00,0.00,0.80,0.00,0.20
+lennygin,Mision Impossible,4,1,00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+lennygin,Harry potter,5,0.10,0.00,0.00,0.00,0.70,0.00,0.10,0.00,0.10
+lennygin,Lord of the Rings,5,0.30,0.00,0.00,0.00,0.70,0.00,0.00,0.00,0.00
+fatimagin,Joker,2,0.40,0.50,0.00,0.00,0.00,0.00,0.00,0.00,0.10
+fatimagin,While You Were Sleeping,5,0.20,0.20,0.20,0.20,0.00,0.20,0.00,0.00,0.00
+fatimagin,Brooklyn,5,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.50,0.50
+lennygin,Brooklyn,5,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.50,0.50
+fatimagin,Roma,3,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,1,00
+fatimagin,Avengers,4,0.30,0.00,0.00,0.30,0.40,0.00,0.00,0.00,0.00
+fatimagin,Star wars,4,0.30,0.00,0.00,0.00,0.40,0.00,0.00,0.00,0.30
+lennygin,Star wars,5,0.30,0.00,0.00,0.00,0.40,0.00,0.00,0.00,0.30
+fatimagin,Outlander,5,0.50,0.00,0.00,0.00,0.20,0.00,0.00,0.30,0.00
+Cesarin Angelidis ,The Lord of The Rings,5,0.60,0.00,0.00,0.00,0.30,0.00,0.00,0.10,0.00
+Cesarin Angelidis,Wonder ,5,0.00,0.00,0.00,0.50,0.00,0.20,0.10,0.00,0.20
+Cesarin Angelidis,Bourne Supremacy ,2,0.70,0.00,0.00,0.00,0.30,0.00,0.00,0.00,0.00
+Cesarin Angelidis ,Moulin Rouge!,4,0.00,0.00,0.00,0.30,0.20,0.00,0.00,0.30,0.20
+Cesarin Angelidis ,Frozen,5,0.20,0.00,0.00,0.40,0.20,0.00,0.20,0.00,0.00
+Aby,Lord of the Rings,5,0.50,0.00,0.00,0.00,0.50,0.00,0.00,0.00,0.00
+Aby,La propuesta,5,0.00,0.00,0.00,0.30,0.00,0.00,0.00,0.70,0.00
+Aby,Rango,1,0.00,0.00,0.00,0.00,0.00,0.00,1,00,0.00,0.00
+Aby,Guerra de pap√°s,3,0.00,0.00,0.00,1,00,0.00,0.00,0.00,0.00,0.00
+Aby,La momia,4,0.60,0.00,0.00,0.00,0.10,0.00,0.00,0.30,0.00
+Primi,Por mis pistolas,5,0.00,0.00,0.00,1,00,0.00,0.00,0.00,0.00,0.00
+Primi,Santo en el hotel e la muerte,4,0.80,0.00,0.00,0.00,0.20,0.00,0.00,0.00,0.00
+Primi,Dracula,1,0.00,0.30,0.00,0.00,0.70,0.00,0.00,0.00,0.00
+Primi,John Week,5,1,00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+Mony,El d√≠a despu√©s de ma√±ana,5,0.00,0.00,0.70,0.00,0.30,0.00,0.00,0.00,0.00
+Mony,Despu√©s de la tierra,3,0.50,0.00,0.00,0.00,0.50,0.00,0.00,0.00,0.00
+Mony,Star wars,2,0.40,0.00,0.00,0.00,0.50,0.00,0.10,0.00,0.00
+Mosh,Gyo: Tokyo Fish Attack,5,0.40,0.30,0.00,0.00,0.30,0.00,0.00,0.00,0.00
+Mosh,Terminator,4,0.60,0.00,0.00,0.00,0.40,0.00,0.00,0.00,0.00
+Mosh,Inception,5,0.00,0.00,0.00,0.00,1,00,0.00,0.00,0.00,0.00
