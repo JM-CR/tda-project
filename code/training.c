@@ -318,7 +318,7 @@ Data_t *start_training(void){
      while (flag != 1){
         for (int i = 0; i < data->totalUsers; i++){
             data_usr = data->users[i];
-            for (int j = 0; j < data->totalMovies; j++){
+            for (int j = 0; j < data_usr->watchTotal; j++) {
                 data_movie = data->movies[j];
                 //User dot priduct with Movie
                 if (data_usr->totalAffinity == data_movie->totalAffinity) {
@@ -350,7 +350,7 @@ Data_t *start_training(void){
         error = 0;
 
         // Exit condition
-        if (count_flag == (data->totalMovies * data->totalUsers)){
+        if (count_flag == (data_usr->watchTotal * data->totalUsers)){
             flag = 1;
         } else {
             count_flag=0;

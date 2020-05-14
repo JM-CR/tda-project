@@ -13,7 +13,7 @@ int main( void ) {
 	int op, id;
 	initialGuide();
 	Data_t *data = start_training();
-	//createGraph();
+	createGraph();
 
 	op = SuggestionsOptions();
 	if(op==1) 
@@ -33,6 +33,6 @@ int main( void ) {
     }
 
 	// Print report
-	//print_in_file(REPORTS_FILE, data);
+	print_in_file(REPORTS_FILE, data);
 	return 0;
 }
