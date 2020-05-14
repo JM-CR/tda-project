@@ -1,7 +1,7 @@
-// See suggestions.h for more info
-// Author: Ivan Josue Guzman Felix
+// See model.h for more info
+// Author: Josue Mosiah Contreras Rocha
 // File: suggestions.c
-// Date: 10/05/20
+// Date: 17/02/20
 
 // ------------------------------------------
 // System and aplication specific headers
@@ -10,6 +10,7 @@
 #include<stdlib.h>
 #include<time.h>
 #include "suggestions.h"
+#include "view.h"
 
 // -----------------------------
 // Private elements
@@ -23,16 +24,13 @@
 
 /* Private functions */
 
-void movieSuggestionUser(Data_t *data )
+int movieSuggestionUser(Data_t *data )
 {		
-	int i,j, user;
+	int i,j, user, mayor=0;
 	double total[data->totalMovies], add, temp;
-	printf("Test movieSuggestionUser\n");
 	
-
-	printf("Insert User's ID: ");
-	scanf("%d", &user);
-
+	user = askMenuValue("Inserta el ID del Usuario: ", 1, data->totalUsers);
+	//printf("Inserta el ID del Usuario : ");
 
 	for(i=0; i<(data->totalMovies); i++)
 	{
@@ -43,20 +41,25 @@ void movieSuggestionUser(Data_t *data )
 			//printf("%f ", data->movies[i]->affinity[j]);
 		}
 		total[i]= add;
-		printf("%f\n", total[i]);
+		//printf("%f\n", total[i]);
+		//printf("%d\n", data->users[user-1]->watchedMovies[j]);
 		add=0;
 	}
-	
+	for (int i = 0; i < data->totalMovies ; ++i)
+	{
+		if (total[i] > mayor) mayor = i;
+	}
+
+
+	return mayor;
 }
 
-void friendsSuggestions(Data_t *data)
+int friendsSuggestions(Data_t *data)
 {	
-	int i,j, user;
+	int i,j, user, mayor=0;
 	double total[data->totalUsers], add, temp;
-	printf("Test friendsSuggestion\n");
 
-	printf("Insert User's ID: ");
-	scanf("%d", &user);
+	user = askMenuValue("Inserta el ID del Usuario: ", 1, data->totalUsers);
 
 
 	for(i=0; i<(data->totalUsers); i++)
@@ -73,21 +76,24 @@ void friendsSuggestions(Data_t *data)
 
 		}
 		total[i]= add;
-		printf("%f\n", total[i]);
+		//printf("%f\n", total[i]);
 		add=0;
 	}
 
+	for (int i = 0; i < data->totalUsers ; ++i)
+	{
+		if (total[i] > mayor) mayor = i;
+	}
+	return mayor;
 }
 
-void movieSuggestionMovie(Data_t *data)
+int movieSuggestionMovie(Data_t *data)
 {
-	int i,j, movieID;
+	int i,j, movieID, mayor=0;
 	double total[data->totalMovies], add, temp;
-	printf("Test movieSuggestionMovie\n");
 	
 
-	printf("Insert Movie's ID: ");
-	scanf("%d", &movieID);
+	movieID = askMenuValue("Inserta el ID de la pelicula: ", 1, data->totalMovies);
 
 
 	for(i=0; i<(data->totalMovies); i++)
@@ -102,10 +108,15 @@ void movieSuggestionMovie(Data_t *data)
 			}
 		}
 		total[i]= add;
-		printf("%f\n", total[i]);
+		//printf("%f\n", total[i]);
 		add=0;
 	}
-	
+
+	for (int i = 0; i < data->totalMovies ; ++i)
+	{
+		if (total[i] > mayor) mayor = i;
+	}
+	return mayor;
 }
 
 // -----------------------------
