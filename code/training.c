@@ -243,7 +243,8 @@ static void setFeatures( char *features[], Movie_t *movie ) {
  * @param aff_movie Vector from the movies.
  * @return Result.
  */
-static double dot_product(int size_vector, double *aff_usr, double *aff_movie) {
+
+double dot_product(int size_vector, double *aff_usr, double *aff_movie) {
     double res=0;
     for (int i = 0; i < size_vector; i++) {
        res += aff_usr[i] * aff_movie[i];
@@ -320,7 +321,7 @@ Data_t *start_training(void){
             data_usr = data->users[i];
             for (int j = 0; j < data->totalMovies; j++){
                 data_movie = data->movies[j];
-                //User dot priduct with Movie
+                //User dot product with Movie
                 if (data_usr->totalAffinity == data_movie->totalAffinity) {
                     res_dot_product = dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity);
                     //calculate error in training algorithm

@@ -32,7 +32,7 @@ int main( void ) {
 		printf("Te podria gustar ->   %s\n", data->movies[id]->name);
     }
 
-	// Print report
-	//print_in_file(REPORTS_FILE, data);
+	// Print in report
+	print_in_file(REPORTS_FILE, data);
 	return 0;
 }
