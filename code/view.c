@@ -58,17 +58,6 @@ void initialGuide( void ) {
     );
 }
 
-void printMenu( void ) {
-    printf(
-        "\n------------------------\n\n"
-        "Operaciones disponibles:\n"
-        "\t1. \n"
-        "\t2. \n"
-        "\t3. \n"
-        "\t4. \n"
-    );
-}
-
 unsigned int askMenuValue( char *text, int lower, int upper ) {
     // Display
     printf("\n%s", text);
@@ -81,7 +70,6 @@ unsigned int askMenuValue( char *text, int lower, int upper ) {
 
 unsigned int SuggestionsOptions()
 {   
-    int op;
     printf(
         "\n------------------------\n\n"
         "Que quieres que te sugiramos?:\n"
@@ -91,9 +79,8 @@ unsigned int SuggestionsOptions()
         "\t4. Salir\n"
     );
 
+    int op;
     op = askMenuValue("", 1, 4);
-
-    //printf("%d/n", op);
     return op;
 }
 
@@ -103,7 +90,7 @@ void displayUsers( Data_t *data ) {
         "Usuarios actuales:\n"
     );
     for ( int i = 0; i < data->totalUsers; ++i ) {
-        printf("\t%d. %s\n", i  + 1, data->users[i]->name);
+        printf("\t%d. %s\n", i + 1, data->users[i]->name);
     }
 }
 
@@ -113,6 +100,6 @@ void displayMovies( Data_t *data ) {
         "Películas actuales:\n"
     );
     for ( int i = 0; i < data->totalMovies; ++i ) {
-        printf("\t%2d. %s\n", i  + 1, data->movies[i]->name);
+        printf("\t%2d. %s\n", i + 1, data->movies[i]->name);
     }
 }

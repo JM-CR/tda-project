@@ -30,11 +30,6 @@ void clearScreen( void );
 void initialGuide( void );
 
 /**
- * Displays the available operations.
- */
-void printMenu( void );
-
-/**
  * Allows the user to choose an option from a menu.
  *
  * @param text Instructions.
