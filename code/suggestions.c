@@ -1,7 +1,7 @@
 // See model.h for more info
-// Author: Josue Mosiah Contreras Rocha
+// Author: Ivan Josue Guzman Felix
 // File: suggestions.c
-// Date: 17/02/20
+// Date: 14/05/20
 
 // ------------------------------------------
 // System and aplication specific headers
@@ -24,14 +24,21 @@
 
 /* Private functions */
 
+
+// -----------------------------
+// Public elements
+// -----------------------------
+
+/* Implementation of the public functions */
+
 int movieSuggestionUser(Data_t *data )
 {		
 	int i,j, user, mayor=0;
 	double total[data->totalMovies], add, temp;
 	
 	user = askMenuValue("Inserta el ID del Usuario: ", 1, data->totalUsers);
-	//printf("Inserta el ID del Usuario : ");
 
+	//Product poin between a especific users and all movies 
 	for(i=0; i<(data->totalMovies); i++)
 	{
 		for(j=0; j<(data->movies[0]->totalAffinity); j++)
@@ -41,13 +48,21 @@ int movieSuggestionUser(Data_t *data )
 			//printf("%f ", data->movies[i]->affinity[j]);
 		}
 		total[i]= add;
-		//printf("%f\n", total[i]);
-		//printf("%d\n", data->users[user-1]->watchedMovies[j]);
 		add=0;
 	}
+
+
+	//Remove watched movies
+	for(i=0; i<data->users[user-1]->watchTotal;i++)
+	{
+		total[data->users[user-1]->watchedMovies[i]] = 0;
+	}
+
+	//Max affinity movie
 	for (int i = 0; i < data->totalMovies ; ++i)
 	{
-		if (total[i] > mayor) mayor = i;
+		printf("%f\n", total[i]);
+		//if (total[i] > mayor) mayor = i;
 	}
 
 
@@ -61,7 +76,7 @@ int friendsSuggestions(Data_t *data)
 
 	user = askMenuValue("Inserta el ID del Usuario: ", 1, data->totalUsers);
 
-
+	//Product poin between a especific users and all users
 	for(i=0; i<(data->totalUsers); i++)
 	{
 		for(j=0; j<(data->users[0]->totalAffinity); j++)
@@ -76,10 +91,10 @@ int friendsSuggestions(Data_t *data)
 
 		}
 		total[i]= add;
-		//printf("%f\n", total[i]);
 		add=0;
 	}
-
+	
+	//Max affinity movie
 	for (int i = 0; i < data->totalUsers ; ++i)
 	{
 		if (total[i] > mayor) mayor = i;
@@ -95,7 +110,7 @@ int movieSuggestionMovie(Data_t *data)
 
 	movieID = askMenuValue("Inserta el ID de la pelicula: ", 1, data->totalMovies);
 
-
+	//Product poin between a especific movie and all movies
 	for(i=0; i<(data->totalMovies); i++)
 	{
 		for(j=0; j<(data->movies[0]->totalAffinity); j++)
@@ -112,16 +127,10 @@ int movieSuggestionMovie(Data_t *data)
 		add=0;
 	}
 
+	//Max affinity movie
 	for (int i = 0; i < data->totalMovies ; ++i)
 	{
 		if (total[i] > mayor) mayor = i;
 	}
 	return mayor;
 }
-
-// -----------------------------
-// Public elements
-// -----------------------------
-
-/* Implementation of the public functions */
-
