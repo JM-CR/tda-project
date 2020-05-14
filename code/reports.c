@@ -37,7 +37,7 @@ static void print_table_line(FILE *fp)
  */
 static void print_table_line_end(FILE *fp)
 {
-    fprintf(fp, "|_________________________________________________________________________________________|\n");
+    fprintf(fp, "|________________________________________________________________________________________|\n");
 }
 
 /**
@@ -47,8 +47,8 @@ static void print_table_line_end(FILE *fp)
  */
 static void print_table_column_name(FILE *fp, char msg1[128], char msg2[128], char msg3[128])
 {
-    fprintf(fp, "| %-25s| %-32s| %-24s |\n", msg1, msg2, msg3);
-    print_table_line(fp);
+    fprintf(fp, "| %-35s| %-32s| %-15s |\n", msg1, msg2, msg3);
+    print_table_line_end(fp);
 }
 
 /**
@@ -59,9 +59,9 @@ static void print_table_column_name(FILE *fp, char msg1[128], char msg2[128], ch
 static void print_welcome(FILE *fp, char message[128])
 {
     print_table_line(fp);
-    fprintf(fp, "|%-75s|\n", " ");
+    fprintf(fp, "|%-88s|\n", " ");
     fprintf(fp, "|                            %-60s|\n", message);
-    print_table_line(fp);
+    print_table_line_end(fp);
 }
 
 // -----------------------------
@@ -104,11 +104,11 @@ void print_in_file(char filename[50], Data_t *data)
         {
             if (j == 0)
             {
-                fprintf(fp, "| %-25s|%-33s| %-8.2f |\n", data_usr->name, affinityNames[j], data_usr->affinity[j] * 10);
+                fprintf(fp, "| %-35s|%-33s | %16.2f|\n", data_usr->name, affinityNames[j], data_usr->affinity[j] * 10);
             }
             else
             {
-                fprintf(fp, "| %-25s|%-33s| %-9.2f|\n", " ", affinityNames[j], data_usr->affinity[j] * 10);
+                fprintf(fp, "| %-35s|%-33s| %16.2f|\n", " ", affinityNames[j], data_usr->affinity[j] * 10);
             }
         }
         print_table_line_end(fp);
@@ -126,11 +126,11 @@ void print_in_file(char filename[50], Data_t *data)
 
             if (j == 0)
             {
-                fprintf(fp, "| %-25s|%-33s| %-8.2f |\n", data_movie->name, affinityNames[j], data_movie->affinity[j] * 10);
+                fprintf(fp, "| %-35s|%-33s |%17.2f|\n", data_movie->name, affinityNames[j], data_movie->affinity[j] * 10);
             }
             else
             {
-                fprintf(fp, "| %-25s|%-33s| %-9.2f|\n", " ", affinityNames[j], data_movie->affinity[j] * 10);
+                fprintf(fp, "| %-35s|%-33s|%17.2f|\n", " ", affinityNames[j], data_movie->affinity[j] * 10);
             }
         }
         print_table_line_end(fp);
@@ -139,7 +139,7 @@ void print_in_file(char filename[50], Data_t *data)
     fprintf(fp, "\n\n");
     print_welcome(fp, "Ratings by user");
     print_table_line(fp);
-    print_table_column_name(fp, "User", "Movie", "Calculated rating | User rating");
+    print_table_column_name(fp, "User", "Movie", "Calc ★ | User ★");
     for (int i = 0; i < data->totalUsers; i++)
     {
 
@@ -149,15 +149,14 @@ void print_in_file(char filename[50], Data_t *data)
             data_movie = data->movies[j];
             if (j == 0)
             {
-                fprintf(fp, "| %-25s|%-33s| %-8.0f | %-8.u |\n", data_usr->name, data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), data_usr->ratings[j]);
+                fprintf(fp, "| %-35s|%-33s| %-8.0f | %-4.u |\n", data_usr->name, data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), data_usr->ratings[j]);
             }
             else
             {
-                fprintf(fp, "| %-25s|%-33s| %-8.2f | %-8.u |\n", " ", data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), data_usr->ratings[j]);
+                fprintf(fp, "| %-35s|%-33s| %-8.2f | %-4.u |\n", " ", data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), data_usr->ratings[j]);
             }
         }
         print_table_line_end(fp);
     }
-
     fclose(fp);
 }
