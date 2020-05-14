@@ -43,7 +43,10 @@ void printMenu( void );
  * @return Chosen option.
  */
 unsigned int askMenuValue( char *text, int lower, int upper );
-
+/**
+* Movies or friends suggesion view menu 
+*
+*/
 unsigned int SuggestionsOptions();
 
 #endif
