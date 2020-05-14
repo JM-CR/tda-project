@@ -315,13 +315,14 @@ Data_t *start_training(void){
 
     // Algorithm
     removeFile(PLOT_FILE);
-    int flag=0,count_flag=0, currentCycle = 1;
+    int flag=0,count_flag=0, currentCycle = 1, movieID;
      while (flag != 1){
         for (int i = 0; i < data->totalUsers; i++){
             data_usr = data->users[i];
             for (int j = 0; j < data_usr->watchTotal; j++) {
-                data_movie = data->movies[j];
-                //User dot product with Movie
+                movieID = data_usr->watchedMovies[j] - 1;
+                data_movie = data->movies[movieID];
+                //User dot priduct with Movie
                 if (data_usr->totalAffinity == data_movie->totalAffinity) {
                     res_dot_product = dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity);
                     //calculate error in training algorithm
