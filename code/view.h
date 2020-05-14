@@ -44,4 +44,6 @@ void printMenu( void );
  */
 unsigned int askMenuValue( char *text, int lower, int upper );
 
+unsigned int SuggestionsOptions();
+
 #endif
