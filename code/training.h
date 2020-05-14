@@ -80,9 +80,10 @@ double dot_product(int size_vector, double *aff_usr, double *aff_movie);
 /**
  * Trains the data object to use in the recommendations system.
  *
+ * @param data Data object with the initial values.
  * @return Trained object.
  */
-Data_t *start_training(void);
+Data_t *start_training( Data_t *data );
 
 /**
  * Creates the graph after the training.

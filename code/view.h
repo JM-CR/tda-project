@@ -43,10 +43,20 @@ void printMenu( void );
  * @return Chosen option.
  */
 unsigned int askMenuValue( char *text, int lower, int upper );
+
 /**
 * Movies or friends suggesion view menu 
-*
 */
 unsigned int SuggestionsOptions();
+
+/**
+ * Displays all the available users.
+ */
+void displayUsers( Data_t *data );
+
+/**
+ * Displays all the available movies.
+ */
+void displayMovies( Data_t *data );
 
 #endif

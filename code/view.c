@@ -87,10 +87,31 @@ unsigned int SuggestionsOptions()
         "\t1. Peliculas\n"
         "\t2. Amigos\n"
         "\t3. Peliculas Similares\n"
+        "\t4. Salir\n"
     );
 
-    op = askMenuValue("", 1, 3);
+    op = askMenuValue("", 1, 4);
 
     //printf("%d/n", op);
     return op;
+}
+
+void displayUsers( Data_t *data ) {
+    printf(
+        "\n------------------------\n\n"
+        "Usuarios actuales:\n"
+    );
+    for ( int i = 0; i < data->totalUsers; ++i ) {
+        printf("\t%d. %s\n", i  + 1, data->users[i]->name);
+    }
+}
+
+void displayMovies( Data_t *data ) {
+    printf(
+        "\n------------------------\n\n"
+        "Películas actuales:\n"
+    );
+    for ( int i = 0; i < data->totalMovies; ++i ) {
+        printf("\t%2d. %s\n", i  + 1, data->movies[i]->name);
+    }
 }

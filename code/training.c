@@ -305,9 +305,8 @@ Data_t *loadCSVFile( void ) {
     return data;
 }
 
-Data_t *start_training(void){
+Data_t *start_training( Data_t *data ) {
     // Initialize
-    Data_t *data = loadCSVFile();
     User_t *data_usr;
     Movie_t *data_movie;
     double res_dot_product=0, nu=0.01, nm = 0.001;
@@ -333,8 +332,6 @@ Data_t *start_training(void){
                         data_usr->affinity[count] = data_usr->affinity[count] + (nu * newError * data_movie->affinity[count]);
                         data_movie->affinity[count] = data_movie->affinity[count] + (nm * newError * data_usr->affinity[count]);
                     }
-                    data->users[i] = data_usr;
-                    data->movies[j] = data_movie;
                     //GNU Plot
                     if(newError<0.1 && newError>-0.1){
                         count_flag++;

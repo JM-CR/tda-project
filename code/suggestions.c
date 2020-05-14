@@ -45,7 +45,6 @@ int movieSuggestionUser(Data_t *data )
 		{
 			temp = data->users[user-1]->affinity[j] * data->movies[i]->affinity[j];
 			add = add + temp;
-			//printf("%f ", data->movies[i]->affinity[j]);
 		}
 		total[i]= add;
 		add=0;
@@ -59,12 +58,9 @@ int movieSuggestionUser(Data_t *data )
 	}
 
 	//Max affinity movie
-	for (int i = 0; i < data->totalMovies ; ++i)
-	{
-		printf("%f\n", total[i]);
-		//if (total[i] > mayor) mayor = i;
+	for (int i = 0; i < data->totalMovies ; ++i) {
+		if (total[i] > mayor) mayor = i;
 	}
-
 
 	return mayor;
 }
@@ -85,8 +81,6 @@ int friendsSuggestions(Data_t *data)
 			{
 				temp = data->users[user-1]->affinity[j] * data->users[i]->affinity[j];
 				add = add + temp;
-				//printf("%f ", data->movies[i]->affinity[j]);
-			
 			}
 
 		}
@@ -95,8 +89,7 @@ int friendsSuggestions(Data_t *data)
 	}
 	
 	//Max affinity movie
-	for (int i = 0; i < data->totalUsers ; ++i)
-	{
+	for (int i = 0; i < data->totalUsers ; ++i) {
 		if (total[i] > mayor) mayor = i;
 	}
 	return mayor;
@@ -119,17 +112,14 @@ int movieSuggestionMovie(Data_t *data)
 			{
 				temp = data->movies[movieID-1]->affinity[j] * data->movies[i]->affinity[j];
 				add = add + temp;
-				//printf("%f ", data->movies[i]->affinity[j]);
 			}
 		}
 		total[i]= add;
-		//printf("%f\n", total[i]);
 		add=0;
 	}
 
 	//Max affinity movie
-	for (int i = 0; i < data->totalMovies ; ++i)
-	{
+	for (int i = 0; i < data->totalMovies ; ++i) {
 		if (total[i] > mayor) mayor = i;
 	}
 	return mayor;

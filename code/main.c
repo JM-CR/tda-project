@@ -12,27 +12,34 @@ int main( void ) {
 	// Load data
 	int op, id;
 	initialGuide();
-	Data_t *data = start_training();
-	createGraph();
+	Data_t *initialData = loadCSVFile();
+	Data_t *trainedData = start_training(initialData);
+	// createGraph();
 
-	op = SuggestionsOptions();
-	if(op==1) 
-    {
-        id = movieSuggestionUser(data); 
-		printf("Deberias ver ->   %s\n", data->movies[id]->name);
-    }
-	if(op==2) 
-    {
-        id = friendsSuggestions(data); 
-		printf("Deberias conocer a ->   %s\n", data->users[id]->name);
-    }
-	if(op==3) 
-    {
-        id = movieSuggestionMovie(data); 
-		printf("Te podria gustar ->   %s\n", data->movies[id]->name);
-    }
+	// Display data
+	displayUsers(trainedData);
+	displayMovies(initialData);
+
+	// Display menu
+	do {
+		op = SuggestionsOptions();
+		switch ( op ) {
+		case 1:
+			id = movieSuggestionUser(trainedData); 
+			printf("Deberias ver ->   %s\n", trainedData->movies[id]->name);
+			break;
+		case 2:
+			id = friendsSuggestions(trainedData); 
+			printf("Deberias conocer a ->   %s\n", trainedData->users[id]->name);
+			break;
+		case 3:
+			id = movieSuggestionMovie(trainedData); 
+			printf("Te podria gustar ->   %s\n", trainedData->movies[id]->name);
+			break;
+		}
+	} while( op != 4 );
 
 	// Print in report
-	print_in_file(REPORTS_FILE, data);
+	print_in_file(REPORTS_FILE, trainedData);
 	return 0;
 }
