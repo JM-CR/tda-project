@@ -79,6 +79,7 @@ void print_in_file(char filename[50], Data_t *data)
 {
     User_t *data_usr;
     Movie_t *data_movie;
+    unsigned int movieID;
     char affinityNames[9][50] = {
         "Acción",
         "Terror",
@@ -144,16 +145,17 @@ void print_in_file(char filename[50], Data_t *data)
     {
 
         data_usr = data->users[i];
-        for (int j = 0; j < data->totalMovies; j++)
+        for (int j = 0; j < data_usr->watchTotal; j++)
         {
-            data_movie = data->movies[j];
+            movieID = data_usr->watchedMovies[j] - 1;
+            data_movie = data->movies[movieID];
             if (j == 0)
             {
-                fprintf(fp, "| %-35s|%-33s| %-8.0f | %-4.u |\n", data_usr->name, data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), data_usr->ratings[j]);
+                fprintf(fp, "| %-35s|%-33s| %-8.0f | %-4.lf |\n", data_usr->name, data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), (double)data_usr->ratings[j]);
             }
             else
             {
-                fprintf(fp, "| %-35s|%-33s| %-8.2f | %-4.u |\n", " ", data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), data_usr->ratings[j]);
+                fprintf(fp, "| %-35s|%-33s| %-8.2f | %-4.lf |\n", " ", data_movie->name, dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity), (double)data_usr->ratings[j]);
             }
         }
         print_table_line_end(fp);
