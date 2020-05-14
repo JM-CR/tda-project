@@ -8,6 +8,7 @@
 // System and application specific headers
 // ------------------------------------------
 #include <time.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,6 +19,14 @@
 // -----------------------------
 // Private elements
 // -----------------------------
+
+/* Private macros and constants */
+
+#define PLOT_FILE "training_files/plot.dat"
+
+/* Private types */
+
+/* Private global variables */
 
 /* Private functions */
 
@@ -242,6 +251,17 @@ static double dot_product(int size_vector, double *aff_usr, double *aff_movie) {
     return res;
 }
 
+/**
+ * Calculates the error for the training algorithm.
+ *
+ * @param error Variable where the results will be saved.
+ * @param newValue New value to add.
+ */
+static void squareError( double *error, double newValue ) {
+    *error += pow(newValue, 2);
+}
+
+
 // -----------------------------
 // Public elements
 // -----------------------------
@@ -285,11 +305,16 @@ Data_t *loadCSVFile( void ) {
 }
 
 Data_t *start_training(void){
+    // Initialize
     Data_t *data = loadCSVFile();
     User_t *data_usr;
     Movie_t *data_movie;
-    double res_dot_product=0, error=0, n=0.01;
-    int flag=0,count_flag=0;
+    double res_dot_product=0, nu=0.01, nm = 0.001;
+    double plotValues[2], error=0, newError = 0;  /* GNUlot */
+
+    // Algorithm
+    removeFile(PLOT_FILE);
+    int flag=0,count_flag=0, currentCycle = 1;
      while (flag != 1){
         for (int i = 0; i < data->totalUsers; i++){
             data_usr = data->users[i];
@@ -299,16 +324,17 @@ Data_t *start_training(void){
                 if (data_usr->totalAffinity == data_movie->totalAffinity) {
                     res_dot_product = dot_product(data_usr->totalAffinity, data_usr->affinity, data_movie->affinity);
                     //calculate error in training algorithm
-                    error = (double)data_usr->ratings[j] - res_dot_product;
+                    newError = (double)data_usr->ratings[j] - res_dot_product;
+                    squareError(&error, newError);
                     //calculate new values in affinity.
                     for (int count=0; count < data_usr->totalAffinity; count++) {
-                        data_usr->affinity[count] = data_usr->affinity[count] + (n * error * data_movie->affinity[count]);
-                        data_movie->affinity[count] = data_movie->affinity[count] + (n * error * data_usr->affinity[count]);
+                        data_usr->affinity[count] = data_usr->affinity[count] + (nu * newError * data_movie->affinity[count]);
+                        data_movie->affinity[count] = data_movie->affinity[count] + (nm * newError * data_usr->affinity[count]);
                     }
                     data->users[i] = data_usr;
                     data->movies[j] = data_movie;
                     //GNU Plot
-                    if(error<0.1 && error>-0.1){
+                    if(newError<0.1 && newError>-0.1){
                         count_flag++;
                     }
                 } else {
@@ -317,11 +343,29 @@ Data_t *start_training(void){
             }
         }
 
+        // GNUplot graph
+        plotValues[0] = currentCycle++;
+        plotValues[1] = sqrt(error);
+        saveState(PLOT_FILE, plotValues, 2);
+        error = 0;
+
+        // Exit condition
         if (count_flag == (data->totalMovies * data->totalUsers)){
             flag = 1;
-        }else{
+        } else {
             count_flag=0;
         }
     }
     return data;
+}
+
+void createGraph( void ) {
+    char *commands[] = {
+        "set title 'Training Error'",
+        "set xlabel 'Cycles'",
+        "set ylabel 'Error",
+        "plot 'training_files/plot.dat' u 1:2 title '' with lines"
+    };
+    int length = sizeof(commands) / sizeof(char *);
+    plot(commands, length);
 }

@@ -12,6 +12,7 @@ int main( void ) {
 	// Load data
 	initialGuide();
 	Data_t *data = start_training();
+	createGraph();
 
 	// Print report
 	print_in_file(REPORTS_FILE, data);

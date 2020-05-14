@@ -74,4 +74,9 @@ Data_t *loadCSVFile( void );
  */
 Data_t *start_training(void);
 
+/**
+ * Creates the graph after the training.
+ */
+void createGraph( void );
+
 #endif
