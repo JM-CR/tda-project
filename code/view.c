@@ -77,3 +77,20 @@ unsigned int askMenuValue( char *text, int lower, int upper ) {
     // Translate
     return value;
 }
+
+unsigned int SuggestionsOptions()
+{   
+    int op;
+    printf(
+        "\n------------------------\n\n"
+        "Que quieres que te sugiramos?:\n"
+        "\t1. Peliculas\n"
+        "\t2. Amigos\n"
+        "\t3. Peliculas Similares\n"
+    );
+
+    op = askMenuValue("", 1, 3);
+
+    //printf("%d/n", op);
+    return op;
+}
