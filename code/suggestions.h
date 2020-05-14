@@ -1,5 +1,5 @@
 // Template to create C libraries.
-// Author: Josue Mosiah Contreras Rocha
+// Author: Ivan Josue Guzman Felix
 // File: suggestions.h
 // Date: 17/02/20
 
@@ -23,10 +23,32 @@
 /* Global variables */
 
 /* Function prototypes */
+
+/**
+*This funcion puts a movie suggestion according to a user´s affinities
+*
+*@Trained database
+*@return a movie suggestion
+*
+*/
 int movieSuggestionUser(Data_t *data );
 
+/**
+*This funcion puts a friend suggestion according to a user´s affinities
+*
+*@Trained database
+*@return a friend suggestion
+*
+*/
 int friendsSuggestions(Data_t *data);
 
+/**
+*This funcion puts a movie suggestion according to a other movie´s affinities
+*
+*@Trained database
+*@return a friend suggestion
+*
+*/
 int movieSuggestionMovie(Data_t *data);
 
 
