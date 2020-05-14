@@ -1,7 +1,7 @@
-// Library to make suggestions of movies and users.
-// Author: Ivan Josue Guzman Felix
+// Template to create C libraries.
+// Author: Josue Mosiah Contreras Rocha
 // File: suggestions.h
-// Date: 10/05/20
+// Date: 17/02/20
 
 #ifndef SUGGESTIONS_H
 #define SUGGESTIONS_H
@@ -23,20 +23,15 @@
 /* Global variables */
 
 /* Function prototypes */
+int movieSuggestionUser(Data_t *data );
+
+int friendsSuggestions(Data_t *data);
+
+int movieSuggestionMovie(Data_t *data);
+
 
 /**
  * Function's documentation.
  */
-void movieSuggestionUser(Data_t *data );
-
-/**
- * Function's documentation.
- */
-void friendsSuggestions(Data_t *data);
-
-/**
- * Function's documentation.
- */
-void movieSuggestionMovie(Data_t *data);
 
 #endif
